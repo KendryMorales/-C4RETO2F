@@ -64,7 +64,7 @@ function autenticar(email, pass) {
                 sessionStorage.setItem("userId1", respuesta.id)
                 sessionStorage.setItem("userName1", respuesta.name)
                 sessionStorage.setItem("userEmail1", respuesta.email)
-                window.location = '../welcome.html';
+                window.location = '../C4RETO2F/welcome.html';
 
             } else {
                 console.log("El usuario no existe");

@@ -21,7 +21,7 @@ function saveProduct() {
                 reference: $("#referenceP").val(),
                 brand: $("#brandP").val(),
                 category: $("#categoryP").val(),
-                objective: $("#objectiveP").val(),
+                objetivo: $("#objectiveP").val(),
                 description: $("#descriptionP").val(),
                 availability: $("#availabilityP").val(),
                 price: $("#priceP").val(),

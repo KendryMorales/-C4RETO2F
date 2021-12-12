@@ -41,7 +41,7 @@ function paintProduct(response) {
         myTable += "<td>" + response[i].reference + "</td>";
         myTable += "<td>" + response[i].brand + "</td>";
         myTable += "<td>" + response[i].category + "</td>";
-        myTable += "<td>" + response[i].objective + "</td>";
+        myTable += "<td>" + response[i].objetivo + "</td>";
         myTable += "<td>" + response[i].description + "</td>";
         myTable += "<td>" + response[i].availability + "</td>";
         myTable += "<td>" + response[i].price + "</td>";
@@ -75,7 +75,7 @@ function loadProduct(ref) {
             $("#referenceP").val(item.reference);
             $("#brandP").val(item.brand);
             $("#categoryP").val(item.category);
-            $("#objectiveP").val(item.objective);
+            $("#objectiveP").val(item.objetivo);
             $("#descriptionP").val(item.description);
             $("#availabilityP").val(item.availability).change();
             $("#priceP").val(item.price);
@@ -119,7 +119,7 @@ function saveProduct() {
                 reference: $("#referenceP").val(),
                 brand: $("#brandP").val(),
                 category: $("#categoryP").val(),
-                objective: $("#objectiveP").val(),
+                objetivo: $("#objectiveP").val(),
                 description: $("#descriptionP").val(),
                 availability: $("#availabilityP").val(),
                 price: $("#priceP").val(),
@@ -159,7 +159,7 @@ function updateProduct(ref) {
         $("#referenceP").val().length == 0 ||
         $("#brandP").val().length == 0 ||
         $("#categoryP").val().length == 0 ||
-        // $("#objectiveP").val().length == 0 ||
+        $("#objectiveP").val().length == 0 ||
         $("#descriptionP").val().length == 0 ||
         $("#availabilityP").val() == null ||
         $("#availabilityP").val().length == 0 ||
@@ -175,7 +175,7 @@ function updateProduct(ref) {
                 reference: ref,
                 brand: $("#brandP").val(),
                 category: $("#categoryP").val(),
-                objective: $("#objectiveP").val(),
+                objetivo: $("#objectiveP").val(),
                 description: $("#descriptionP").val(),
                 availability: $("#availabilityP").val(),
                 price: $("#priceP").val(),

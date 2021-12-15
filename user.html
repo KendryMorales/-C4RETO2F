@@ -34,16 +34,11 @@
                                     <span class="fw-normal">Usuario: <span id="resultado"></span></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item hide_nav" href="product.html">Producto</a></li>
-                                    <li><a class="dropdown-item hide_nav" href="user.html">Usuario</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item hide_nav" href="tableUser.html">Tabla de usuario</a>
-                                    </li>
-                                    <li><a class="dropdown-item hide_nav" href="tableProduct.html">Tabla de
-                                            inventario</a>
-                                    </li>
+                                    <li id="menu_product"><a class="dropdown-item" href="product.html">Producto</a></li>
+                                    <li id="menu_user"><a class="dropdown-item" href="user.html">Usuario</a></li>
+                                    <li id="menu_tabUser"><a class="dropdown-item" href="tableUser.html">Listado de usuario</a></li>
+                                    <li id="menu_tabProduct"><a class="dropdown-item" href="tableProduct.html">Listado de productos</a></li>
+                                    <li><a id="cerrarSession" class="dropdown-item" href="#">Salir</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -117,34 +112,45 @@
                             </div>
                             <div id="msg_pass02" class="msg"></div>
                         </div>
-                        <div class="form-group mb-3">
-                            <!-- <label for="zoneUser" class="form-label">Zona</label><br /> -->
+                        <!-- <div class="form-group mb-3">
+                            <label for="zoneUser" class="form-label">Zona</label><br />
                             <input type="text" name="zoneUser" id="zoneUser" class="form-control" placeholder="Zona"
                                 required />
                             <div id="msg_zoneUser" class="invalid-feedback">
                                 Digite su zona
+                            </div>
+                        </div> -->
+                        <div class="form-group form-group mb-4">
+                            <!-- <label for="zoneUser" class="form-label">Zona</label><br /> -->
+                            <select name="zoneUser" id="zoneUser" class="form-control form-select" required>
+                                <option selected value="">Seleccione la zona</option>
+                                <option value="ZONA 1">Zona 1</option>
+                                <option value="ZONA 2">Zona 2</option>
+                            </select>
+                            <div id="msg_zoneUser" class="invalid-feedback">
+                                Seleccione la zona
                             </div>
                         </div>
                         <div class="form-group form-group mb-4">
                             <!-- <label for="typeUser" class="form-label">Tipo de usuario</label><br> -->
                             <select name="typeUser" id="typeUser" class="form-control form-select" required>
                                 <option selected value="">Selecciona el tipo de usuario</option>
-                                <option value="coordinadorZona">Coordinador de zona</option>
-                                <option value="asesorComercial">Asesor Comercial</option>
-                                <option value="administrador">Administrador</option>
+                                <option value="COORD">Coordinador de zona</option>
+                                <option value="ASE">Asesor Comercial</option>
+                                <option value="ADM">Administrador</option>
                             </select>
                             <div id="msg_typrUser" class="invalid-feedback">
-                                Digite el tipo de usuario
+                                Seleccione el tipo de usuario
                             </div>
                         </div>
                         <div class="form-group d-grid">
                             <input type="submit" name="submit" class="btn btn-primary mb-3 btn-block btn_new"
                                 value="Crear" onclick="register()" />
                         </div>
-                        <div class="form-group mb-4 text-center">
+                        <!-- <div class="form-group mb-4 text-center">
                             <span>¿Tienes una cuenta? <a href="login.html" class="text-decoration-none">Inicia
                                     seccion</a></span>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>

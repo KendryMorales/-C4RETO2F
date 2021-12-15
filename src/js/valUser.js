@@ -26,39 +26,44 @@ formUser.onsubmit = function (event) {
 
 async function register() {
     // adClass.classList.remove("was-validated")
-    try {
-        adClass.classList.add("was-validated")
+    if (userType == 'ADM') {
 
-        //para quitar espacios en blancos
-        const nameValue = nameU.value.toLowerCase().trim();
-        const emailValue = email.value.toLowerCase().trim();
-        const passwordValue = password.value.trim();
-        // const password1Value = password1.value.trim();
+        try {
+            adClass.classList.add("was-validated")
 
-        console.log(`emailValue`, emailValue);
+            //para quitar espacios en blancos
+            const nameValue = nameU.value.toLowerCase().trim();
+            const emailValue = email.value.toLowerCase().trim();
+            const passwordValue = password.value.trim();
+            // const password1Value = password1.value.trim();
 
-        if (nameValue != "" && passwordValue != "" && emailValue != "" &&
-            ident.value.length != "" && addresU.value.length != "" &&
-            cel.value.length != "" && zoneU.value.length != "" &&
-            typeU.value.length != ""
-        ) {
-            if (nameU.value.length < 81 && email.value.length < 51 && password.value.length < 51) {
-                if (compare()) {
-                    if (expreRegular()) {
-                        let existE = await existEmail(emailValue);
-                        if (!existE) {
-                            console.log("Entro en guardar");
-                            saveUser();
+            console.log(`emailValue`, emailValue);
+
+            if (nameValue != "" && passwordValue != "" && emailValue != "" &&
+                ident.value.length != "" && addresU.value.length != "" &&
+                cel.value.length != "" && zoneU.value.length != "" &&
+                typeU.value.length != ""
+            ) {
+                if (nameU.value.length < 81 && email.value.length < 51 && password.value.length < 51) {
+                    if (compare()) {
+                        if (expreRegular()) {
+                            let existE = await existEmail(emailValue);
+                            if (!existE) {
+                                console.log("Entro en guardar");
+                                saveUser();
+                            }
                         }
                     }
                 }
+            } else {
+                console.log("Los campos no deben estar vacios");
+                alert("Los campos no deben estar vacios");
             }
-        } else {
-            console.log("Los campos no deben estar vacios");
-            alert("Los campos no deben estar vacios");
+        } catch (error) {
+            console.log(`error`, error);
         }
-    } catch (error) {
-        console.log(`error`, error);
+    } else {
+        alert("Permiso denegado");
     }
 }
 
@@ -74,7 +79,7 @@ async function expreRegular() {
         console.log("Formato de email valido");
         await existEmail(emailValue);
     } else {
-        email.value="";
+        email.value = "";
         document.getElementById('msg_email1').innerHTML = "Formato de email invalido";
         console.log("Formato de email invalido");
     }

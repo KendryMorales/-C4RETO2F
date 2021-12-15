@@ -34,16 +34,11 @@
                                     <span class="fw-normal">Bienvenido: <span id="resultado"></span></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item hide_nav" href="product.html">Producto</a></li>
-                                    <li><a class="dropdown-item hide_nav" href="user.html">Usuario</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item hide_nav" href="tableUser.html">Tabla de usuario</a>
-                                    </li>
-                                    <li><a class="dropdown-item hide_nav" href="tableProduct.html">Tabla de
-                                            inventario</a>
-                                    </li>
+                                    <li id="menu_product"><a class="dropdown-item" href="product.html">Producto</a></li>
+                                    <li id="menu_user"><a class="dropdown-item" href="user.html">Usuario</a></li>
+                                    <li id="menu_tabUser"><a class="dropdown-item" href="tableUser.html">Listado de usuario</a></li>
+                                    <li id="menu_tabProduct"><a class="dropdown-item" href="tableProduct.html">Listado de productos</a></li>
+                                    <li><a id="cerrarSession" class="dropdown-item" href="#">Salir</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -61,7 +56,7 @@
                 <div id="msg" class="text-center mb-3"></div>
                 <div class="col-12  form_box">
                     <div class="col-11">
-                        <table id="list" class="table table-responsive table_welcome">
+                        <table id="infoUser" class="table table-responsive table_welcome">
 
                         </table>
                     </div>
@@ -75,8 +70,7 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/311bf9938d.js" crossorigin="anonymous"></script>
-    <!-- <script src="src/js/welcome.js"></script> -->
-    <script src="src/js/dataUser.js"></script>
+    <script src="src/js/welcome.js"></script>
 </body>
 
 </html>

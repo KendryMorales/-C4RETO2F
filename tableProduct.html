@@ -34,16 +34,11 @@
                                     <span class="fw-normal">Usuario: <span id="resultado"></span></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item hide_nav" href="product.html">Producto</a></li>
-                                    <li><a class="dropdown-item hide_nav" href="user.html">Usuario</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item hide_nav" href="tableUser.html">Tabla de usuario</a>
-                                    </li>
-                                    <li><a class="dropdown-item hide_nav" href="tableProduct.html">Tabla de
-                                            inventario</a>
-                                    </li>
+                                    <li id="menu_product"><a class="dropdown-item" href="product.html">Producto</a></li>
+                                    <li id="menu_user"><a class="dropdown-item" href="user.html">Usuario</a></li>
+                                    <li id="menu_tabUser"><a class="dropdown-item" href="tableUser.html">Listado de usuario</a></li>
+                                    <li id="menu_tabProduct"><a class="dropdown-item" href="tableProduct.html">Listado de productos</a></li>
+                                    <li><a id="cerrarSession" class="dropdown-item" href="#">Salir</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -69,7 +64,7 @@
 
         </section>
 
-        <section id="formProduct" class="container_box1 form_product">
+        <section class="container_box1 form_product">
             <div class="row container-fluid">
                 <div class="col-lg-5 col-md-5 col-12 form_box">
                     <form id="formProduct" class="col-lg-12 col-md-12 col-10 form needs-validation" novalidate>

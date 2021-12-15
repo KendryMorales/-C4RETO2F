@@ -3,8 +3,6 @@ $(document).ready(function () {
     getProduct();
 });
 
-// IP 129.158.37.103
-
 function getProduct() {
     $.ajax({
         type: "GET",
@@ -58,190 +56,205 @@ function paintProduct(response) {
 
 
 function loadProduct(ref) {
-    $(".form_product").show(500);
-    $(".table_product").hide();
-    $(".title_product").text("Actualizar producto");
+    if (userType == 'ADM') {
+        $(".form_product").show(500);
+        $(".table_product").hide();
+        $(".title_product").text("Actualizar producto");
 
-    console.log("entro aqui", ref);
+        console.log("entro aqui", ref);
 
-    $.ajax({
-        type: 'GET',
-        datatype: "JSON",
-        url: 'http://129.158.37.103:8082/api/supplements/' + ref,
-        success: function (response) {
-            console.log(response);
-            console.log("referencia", ref);
-            var item = response;
-            $("#referenceP").val(item.reference);
-            $("#brandP").val(item.brand);
-            $("#categoryP").val(item.category);
-            $("#objectiveP").val(item.objetivo);
-            $("#descriptionP").val(item.description);
-            $("#availabilityP").val(item.availability).change();
-            $("#priceP").val(item.price);
-            $("#quantityP").val(item.quantity);
-            $("#photographyP").val(item.photography);
+        $.ajax({
+            type: 'GET',
+            datatype: "JSON",
+            url: 'http://129.158.37.103:8082/api/supplements/' + ref,
+            success: function (response) {
+                console.log(response);
+                console.log("referencia", ref);
+                var item = response;
+                $("#referenceP").val(item.reference);
+                $("#brandP").val(item.brand);
+                $("#categoryP").val(item.category);
+                $("#objectiveP").val(item.objetivo);
+                $("#descriptionP").val(item.description);
+                $("#availabilityP").val(item.availability);
+                $("#priceP").val(item.price);
+                $("#quantityP").val(item.quantity);
+                $("#photographyP").val(item.photography);
 
-            let myTable = "<input type='button' class = 'btn btn-primary mb-3 btn-block col-5 btn_edit' onclick='updateProduct(" + JSON.stringify(item.reference) + ")' value='Actualizar'/>";
-            myTable += '<input type="button" class = "btn btn-primary mb-3 btn-block col-5 btn_edit" onclick="clearProduct()" value="Cancelar"/>';
+                let myTable = "<input type='button' class = 'btn btn-primary mb-3 btn-block col-5 btn_edit' onclick='updateProduct(" + JSON.stringify(item.reference) + ")' value='Actualizar'/>";
+                myTable += '<input type="button" class = "btn btn-primary mb-3 btn-block col-5 btn_edit" onclick="clearProduct()" value="Cancelar"/>';
 
-            $("#addbtn").html(myTable);
+                $("#addbtn").html(myTable);
 
-            console.log("la referencia es", item.reference);
-            console.log("la referencia es", JSON.stringify(item.reference));
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("Ha ocurrido un error");
-        }
-    });
-}
-
-function saveProduct() {
-    $(".needs-validation").addClass("was-validated");
-
-    if (
-        $("#referenceP").val().length == 0 ||
-        $("#brandP").val().length == 0 ||
-        $("#categoryP").val().length == 0 ||
-        $("#objectiveP").val().length == 0 ||
-        $("#descriptionP").val().length == 0 ||
-        $("#availabilityP").val() == null ||
-        $("#availabilityP").val().length == 0 ||
-        $("#priceP").val().length == 0 ||
-        $("#quantityP").val().length == 0 ||
-        $("#photographyP").val().length == 0
-    ) {
-        alert("Los campos no deben estar vacios");
+                console.log("la referencia es", item.reference);
+                console.log("la referencia es", JSON.stringify(item.reference));
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Ha ocurrido un error");
+            }
+        });
     } else {
-        if ($("#descriptionP").val().length < 81) {
-
-            let data = {
-                reference: $("#referenceP").val(),
-                brand: $("#brandP").val(),
-                category: $("#categoryP").val(),
-                objetivo: $("#objectiveP").val(),
-                description: $("#descriptionP").val(),
-                availability: $("#availabilityP").val(),
-                price: $("#priceP").val(),
-                quantity: $("#quantityP").val(),
-                photography: $("#photographyP").val(),
-            };
-            console.log(data);
-
-
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                datatype: "JSON",
-                url: 'http://129.158.37.103:8082/api/supplements/new',
-                data: JSON.stringify(data),
-                success: function (respuesta) {
-                    console.log(respuesta);
-                    alert("Producto registrado de forma correcta!");
-                    clearProduct();
-                    // window.location = '../tableProduct.html';            
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert("No fue posible registrar el producto");
-                }
-            });
-            $("#msg_descriptionP1").text("");
-        } else {
-            $("#msg_descriptionP1").text("La descripcion debe de contener solo 80 caracteres");
-        }
+        alert("Permiso denegado");
     }
 }
 
+function saveProduct() {
+    if (userType == 'ADM') {
+        $(".needs-validation").addClass("was-validated");
+        if (
+            $("#referenceP").val().length == 0 ||
+            $("#brandP").val().length == 0 ||
+            $("#categoryP").val().length == 0 ||
+            $("#objectiveP").val().length == 0 ||
+            $("#descriptionP").val().length == 0 ||
+            $("#availabilityP").val() == null ||
+            $("#availabilityP").val().length == 0 ||
+            $("#priceP").val().length == 0 ||
+            $("#quantityP").val().length == 0 ||
+            $("#photographyP").val().length == 0
+        ) {
+            alert("Los campos no deben estar vacios");
+        } else {
+            if ($("#descriptionP").val().length < 81) {
+                let data = {
+                    reference: $("#referenceP").val(),
+                    brand: $("#brandP").val(),
+                    category: $("#categoryP").val(),
+                    objetivo: $("#objectiveP").val(),
+                    description: $("#descriptionP").val(),
+                    availability: $("#availabilityP").val(),
+                    price: $("#priceP").val(),
+                    quantity: $("#quantityP").val(),
+                    photography: $("#photographyP").val(),
+                };
+                console.log(data);
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "JSON",
+                    url: 'http://129.158.37.103:8082/api/supplements/new',
+                    data: JSON.stringify(data),
+                    success: function (respuesta) {
+                        console.log(respuesta);
+                        alert("Producto registrado de forma correcta!");
+                        clearProduct();
+                        // window.location = '../tableProduct.html';            
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("No fue posible registrar el producto");
+                    }
+                });
+                $("#msg_descriptionP1").text("");
+            } else {
+                $("#msg_descriptionP1").text("La descripcion debe de contener solo 80 caracteres");
+            }
+        }
+
+    } else {
+        alert("No tiene permiso para crear un nuevo producto");
+    }
+}
 
 function updateProduct(ref) {
-    $(".needs-validation").addClass("was-validated");
-    if (
-        $("#referenceP").val().length == 0 ||
-        $("#brandP").val().length == 0 ||
-        $("#categoryP").val().length == 0 ||
-        $("#objectiveP").val().length == 0 ||
-        $("#descriptionP").val().length == 0 ||
-        $("#availabilityP").val() == null ||
-        $("#availabilityP").val().length == 0 ||
-        $("#priceP").val().length == 0 ||
-        $("#quantityP").val().length == 0 ||
-        $("#photographyP").val().length == 0
-    ) {
-        alert("Los campos no deben estar vacios");
-    } else {
-        if ($("#descriptionP").val().length < 81) {
-
-            let element = {
-                reference: ref,
-                brand: $("#brandP").val(),
-                category: $("#categoryP").val(),
-                objetivo: $("#objectiveP").val(),
-                description: $("#descriptionP").val(),
-                availability: $("#availabilityP").val(),
-                price: $("#priceP").val(),
-                quantity: $("#quantityP").val(),
-                photography: $("#photographyP").val(),
-            };
-
-            console.log(element);
-            $.ajax({
-                dataType: 'json',
-                url: "http://129.158.37.103:8082/api/supplements/update",
-                type: 'PUT',
-                data: JSON.stringify(element),
-                contentType: "application/json; charset=utf-8",
-
-                success: function (response) {
-                    console.log(response);
-                    $("#list").empty();
-                    alert("Se ha actualizado correctamente");
-                    clearProduct();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Ha ocurrido un error");
-                }
-            });
-
-            $("#msg_descriptionP1").text("");
+    if (userType == 'ADM') {
+        $(".needs-validation").addClass("was-validated");
+        if (
+            $("#referenceP").val().length == 0 ||
+            $("#brandP").val().length == 0 ||
+            $("#categoryP").val().length == 0 ||
+            $("#objectiveP").val().length == 0 ||
+            $("#descriptionP").val().length == 0 ||
+            $("#availabilityP").val() == null ||
+            $("#availabilityP").val().length == 0 ||
+            $("#priceP").val().length == 0 ||
+            $("#quantityP").val().length == 0 ||
+            $("#photographyP").val().length == 0
+        ) {
+            alert("Los campos no deben estar vacios");
         } else {
-            $("#msg_descriptionP1").text("La descripcion debe de contener solo 80 caracteres");
+            if ($("#descriptionP").val().length < 81) {
+
+                let element = {
+                    reference: ref,
+                    brand: $("#brandP").val(),
+                    category: $("#categoryP").val(),
+                    objetivo: $("#objectiveP").val(),
+                    description: $("#descriptionP").val(),
+                    availability: $("#availabilityP").val(),
+                    price: $("#priceP").val(),
+                    quantity: $("#quantityP").val(),
+                    photography: $("#photographyP").val(),
+                };
+
+                console.log(element);
+                $.ajax({
+                    dataType: 'json',
+                    url: "http://129.158.37.103:8082/api/supplements/update",
+                    type: 'PUT',
+                    data: JSON.stringify(element),
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (response) {
+                        console.log(response);
+                        $("#list").empty();
+                        alert("Se ha actualizado correctamente");
+                        clearProduct();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("Ha ocurrido un error");
+                    }
+                });
+
+                $("#msg_descriptionP1").text("");
+            } else {
+                $("#msg_descriptionP1").text("La descripcion debe de contener solo 80 caracteres");
+            }
         }
+    } else {
+        alert("No tiene permiso para actualizar un producto");
     }
 }
 
 function deleteProduct(ref) {
-    let element = {
-        reference: ref,
-    };
+    if (userType == 'ADM') {
+        let element = {
+            reference: ref,
+        };
 
-    $.ajax({
-        type: "DELETE",
-        contentType: "application/json; charset=utf-8",
-        datatype: "JSON",
-        url: 'http://129.158.37.103:8082/api/supplements/' + ref,
-        data: JSON.stringify(element),
-        success: function (respuesta) {
-            console.log(respuesta);
-            $("#list").empty();
-            alert("Se ha eliminado");
-            clearProduct();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("No fue posible crear la cuenta");
-        }
-    });
-
+        $.ajax({
+            type: "DELETE",
+            contentType: "application/json; charset=utf-8",
+            datatype: "JSON",
+            url: 'http://129.158.37.103:8082/api/supplements/' + ref,
+            data: JSON.stringify(element),
+            success: function (respuesta) {
+                console.log(respuesta);
+                $("#list").empty();
+                alert("Se ha eliminado");
+                clearProduct();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("No fue posible borrar el producto");
+            }
+        });
+    } else {
+        alert("No tiene permiso para borrar productos");
+    }
 }
 
 function newProduct() {
-    $(".form_product").show(500);
-    $(".table_product").hide();
-    $(".btn_register").show(500);
-    $(".title_product").text("Registro de producto");
-    let myTable = '<input type="submit" class = "btn btn-primary mb-3 btn-block col-5 btn_register" onclick="saveProduct()" value="Crear"/>';
-    myTable += '<input type="submit" class = "btn btn-primary mb-3 btn-block col-5 btn_edit" onclick="clearProduct()" value="Cancelar"/>';
-    $("#addbtn").html(myTable);
-
+    if (userType == 'ADM') {
+        $(".form_product").show(500);
+        $(".table_product").hide();
+        $(".btn_register").show(500);
+        $(".title_product").text("Registro de producto");
+        let myTable = '<input type="submit" class = "btn btn-primary mb-3 btn-block col-5 btn_register" onclick="saveProduct()" value="Crear"/>';
+        myTable += '<input type="submit" class = "btn btn-primary mb-3 btn-block col-5 btn_edit" onclick="clearProduct()" value="Cancelar"/>';
+        $("#addbtn").html(myTable);
+    } else {
+        alert("No tiene permiso para crear un nuevo producto");
+    }
 }
 
 function clearProduct() {
